@@ -9,7 +9,7 @@
 	<!-- Informations générales du projet -->
 	<groupId>com.numeryx</groupId>
 	<artifactId>authorization-service</artifactId>
-	<version>1.0.2-SNAPSHOT</version>
+	<version>1.0.2</version>
 	<packaging>jar</packaging>
 	<name>AuthorizationServiceApplication</name>
 	<description>Authorization service for numeryx projects</description>
