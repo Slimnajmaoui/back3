@@ -1,0 +1,106 @@
+spring:
+  application:
+    name: AuthorzationServerApp
+  profiles:
+    active: dev
+  jpa:
+    hibernate:
+      dialect: org.hibernate.dialect.PostgreSQL12Dialect
+      ddl-auto: update
+      cache:
+        use_second_level_cache: true
+        use_query_cache: true
+        region:
+          factory_class: org.hibernate.cache.jcache.JCacheRegionFactory
+        javax:
+          persistence:
+            sharedCache:
+              mode: ALL
+    show-sql: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/auth-db
+    username: data&&Admin1User_aut
+    password: numeryx&&2019W
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      connection-timeout: 30000
+      minimum-idle: 10
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      auto-commit: true
+#      data-source-properties:
+#        oracle:
+#          jdbc:
+#            ReadTimeout: 600000
+#          net:
+#            CONNECT_TIMEOUT: 10000
+#      connection-test-query: select 1 from dual
+  session:
+    store-type: none
+server:
+  address: 0.0.0.0
+  port: 9001
+
+security:
+  oauth2:
+    client:
+      client-id: client_numeryx
+      client-secret: secret_numeryx
+      refresh-token-validity-seconds: 10000
+      access-token-validity-seconds: 9000
+    resource:
+      id: authorization-service
+  jwt:
+    key-store-password: numeryx2020
+    key-pair-alias: num-oauth-jwt
+    token-timeout: 1200000
+    signing-key: numeryx2020
+
+ribbon:
+  eager-load:
+    enabled: true
+
+credentials:
+  super-admin-user-login: super_admin@yopmail.com
+  super-admin-user-password: numeryx2020
+  super-admin-user-identification: 00000000
+
+services:
+  payement:
+    label: Paiement des impôts et taxes
+    url: localhost:9001
+  rs:
+    label: Certificat de Retenue à la source et déclaration de paiement de loyer
+    url: localhost:9001
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 50000
+        readTimeout: 50000
+        loggerLevel: basic
+      apis:
+        notification: http://localhost:8002
+        rc: http://localhost:8001
+        rafic: https://cimf-account.p4d.click/rafic
+logging:
+  pattern:
+    console: " %d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger{36}.%M - %msg%n"
+  level:
+    ROOT: debug
+    com.numeryx.AuthorizationServiceApplication: DEBUG
+    org.springframework: INFO
+    org.hibernate: INFO
+    liquibase: INFO
+  file:
+    max-history: 300
+
+authentication:
+  max-attempts: 3
+  delay-to-enable-in-minutes: 15
+
+url-backoffice: http://localhost:4201/#
+url-subscriber: http://localhost:4202/
+url-partner: http://localhost:4203/

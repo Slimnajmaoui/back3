@@ -1,0 +1,17 @@
+package com.numeryx.AuthorizationServiceApplication.dto.request;
+
+
+import com.numeryx.AuthorizationServiceApplication.dto.BaseUserDto;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
+@EqualsAndHashCode(callSuper = true)
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class CreateProviderAccountDTO extends BaseUserDto {
+
+    private CreateProviderDTO provider;
+}

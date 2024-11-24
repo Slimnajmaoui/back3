@@ -1,0 +1,40 @@
+spring:
+  profiles:
+    active: prod
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+config:
+  oauth2:
+    accessTokenUri: http://localhost:9001/oauth/token
+  #path-jks: /etc/ssl/num-auth.jks
+  path-jks: /etc/num-auth.jks
+
+  #path-jks: C:\Windows\System32\drivers\etc\num-auth.jks
+
+services:
+  payement:
+    label: Paiement des impôts et taxes
+    url: https://cimf-payment.p4d.click
+    role: ROLE_USER
+  rs:
+    label: Certificat de Retenue à la source et déclaration de paiement de loyer
+    url: https://cimf-rs.p4d.click
+    role: ROLE_USER_RS
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 50000
+        readTimeout: 50000
+        loggerLevel: basic
+      apis:
+        notification: http://localhost:8002
+        rc: http://localhost:8001
+        rafic:
+
+url-backoffice: http://localhost:4201/#
+url-subscriber: http://localhost:4202/
+url-partner: http://localhost:4203/

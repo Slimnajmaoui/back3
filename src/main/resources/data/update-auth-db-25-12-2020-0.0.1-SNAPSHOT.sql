@@ -1,0 +1,2 @@
+update subscriber c set subscriber_name = 'Ecole Normale Supérieure Paris-Saclay - M003' where c.id =569;
+update subscriber c set subscriber_name = 'Ecole Normale Supérieure Paris-Saclay - M903' where c.id =568;

@@ -1,0 +1,29 @@
+spring:
+  profiles:
+    active: dev
+  jpa:
+    hibernate:
+      ddl-auto: update
+server:
+  address: 0.0.0.0
+  port: 9001
+
+services:
+  payement:
+    label: Paiement des impôts et taxes
+    url: http://localhost:8901
+    role: ROLE_USER
+  rs:
+    label: Certificat de Retenue à la source et déclaration de paiement de loyer
+    url: http://localhost:8902
+    role: ROLE_USER_RS
+
+config:
+  oauth2:
+    accessTokenUri: http://localhost:9001/oauth/token
+#  path-jks: /etc/ssl/num-auth.jks
+  path-jks: /etc/num-auth.jks
+
+url-backoffice: http://localhost:4201/#
+url-subscriber: http://localhost:4202/
+url-partner: http://localhost:4203/

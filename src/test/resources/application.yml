@@ -1,0 +1,64 @@
+spring:
+  profiles:
+    active: numeryx-test
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=Oracle;INIT=CREATE SCHEMA IF NOT EXISTS userDB_aut
+    username: sa
+    password:
+    platform: h2
+    driver-class-name: org.h2.Driver
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: none
+    generate-ddl: true
+security:
+  oauth2:
+    resource:
+      id: ises-service
+    client:
+      client-id: client_numeryx
+      client-secret: secret_numeryx
+      grant-type: password
+      refresh-token-validity-seconds: 10000
+      access-token-validity-seconds: 9000
+  jwt:
+    key-store-password: numeryx2020
+    key-pair-alias: num-oauth-jwt
+    key-pair-password: numeryx2020
+    token-timeout: 100
+
+credentials:
+  super-admin-user-login: super_admin@yopmail.com
+  super-admin-user-password: numeryx2020
+  super-admin-user-identification: 00000000
+
+server:
+  address: 0.0.0.0
+  port: 8901
+
+services:
+  payement:
+    label: payement
+    url: localhost:9001
+    role: ROLE_USER
+  rs:
+    label: rs
+    url: localhost:9001
+    role: ROLE_USER_RS
+
+config:
+  oauth2:
+    accessTokenUri: http://localhost:9001/oauth/token
+  path-jks: "num-auth.jks"
+feign:
+  client:
+    config:
+      apis:
+        notification: fake-uri
+        rafic: fake-uri-2
+authentication:
+  max-attempts: 3
+  delay-to-enable-in-minutes: 1
